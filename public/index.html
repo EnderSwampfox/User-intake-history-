@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Inquiry Form</title>
+</head>
+<body>
+    <form id="spiritualForm">
+      <label for="background">In your own words, describe your spiritual background:</label><br>
+      <textarea id="background" name="background" rows="4" cols="50"></textarea><br><br>
+
+      <label for="negativeExperience">Describe a negative experience that stands out from spiritual community past experiences:</label><br>
+      <textarea id="negativeExperience" name="negativeExperience" rows="4" cols="50"></textarea><br><br>
+
+      <label for="positiveExperience">Describe a positive spiritual experience that stands out from your past:</label><br>
+      <textarea id="positiveExperience" name="positiveExperience" rows="4" cols="50"></textarea><br><br>
+
+      <label for="unaskedQuestions">What questions do you have regarding spiritual understanding that you have never felt free to ask?:</label><br>
+      <textarea id="unaskedQuestions" name="unaskedQuestions" rows="4" cols="50"></textarea><br><br>
+
+      <label for="currentObstacles">What current obstacles in your life would you like to overcome:</label><br>
+      <textarea id="currentObstacles" name="currentObstacles" rows="4" cols="50"></textarea><br><br>
+
+      <label for="openReflection">Describe a past experience that you would like to be more free to open for reflection without judgement?:</label><br>
+      <textarea id="openReflection" name="openReflection" rows="4" cols="50"></textarea><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('spiritualForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            const formData = {
+                background: document.getElementById('background').value,
+                negativeExperience: document.getElementById('negativeExperience').value,
+                positiveExperience: document.getElementById('positiveExperience').value,
+                unaskedQuestions: document.getElementById('unaskedQuestions').value,
+                currentObstacles: document.getElementById('currentObstacles').value,
+                openReflection: document.getElementById('openReflection').value,
+            };
+
+            // Send formData to server
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
